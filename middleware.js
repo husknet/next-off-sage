@@ -83,5 +83,5 @@ export async function middleware(req) {
 
 // Configure middleware to run only on specific routes
 export const config = {
-  matcher: ['/', '/api/*'], // Apply middleware to the root path and API routes
+  matcher: ['/'], // Apply middleware only to the root path (login page)
 };
