@@ -1,34 +1,17 @@
-/* styles/Index.module.css */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Arial', sans-serif;
-  margin: 0;
-  padding: 0;
+.loginContainer {
+  text-align: center;
   height: 100vh;
-  background: url('/background.jpg') no-repeat center center fixed; /* Full-page background */
-  background-size: cover; /* Ensure the image covers the entire viewport */
-  color: #333;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* Login Container Styles */
-.login-container {
-  text-align: center;
-}
-
-.login-box {
-  background: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+.loginBox {
+  background: rgba(255, 255, 255, 0.9);
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
   padding: 20px;
   width: 300px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .logo {
@@ -39,27 +22,26 @@ body {
 
 .instruction {
   font-size: 16px;
-  color: #555; /* Subtle grey text for instructions */
+  color: #555;
   margin-bottom: 20px;
 }
 
-.entered-email {
+.enteredEmail {
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 16px;
-  color: #333; /* Dark text for the entered email */
+  color: #333;
   margin-bottom: 20px;
 }
 
-.profile-icon {
+.profileIcon {
   width: 24px;
   height: 24px;
   margin-right: 10px;
-  border-radius: 50%; /* Circular profile icon */
+  border-radius: 50%;
 }
 
-/* Input and Button Styles */
 input {
   display: block;
   width: 100%;
@@ -73,7 +55,7 @@ input {
 button {
   width: 100%;
   padding: 10px;
-  background: #007bff; /* Blue background */
+  background: #007bff;
   color: white;
   border: none;
   border-radius: 5px;
@@ -82,71 +64,5 @@ button {
 }
 
 button:hover {
-  background: #0056b3; /* Darker blue on hover */
-}
-
-/* Denied Page Styles */
-.denied-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f8f8f8; /* Light grey background for clarity */
-  text-align: center;
-}
-
-.denied-container h1 {
-  font-size: 2.5rem;
-  color: #e74c3c; /* Red color for the warning */
-  margin-bottom: 1rem;
-}
-
-.denied-container p {
-  font-size: 1.2rem;
-  color: #555; /* Subtle grey text for details */
-  margin: 0.5rem 0;
-}
-
-/* Modal Styles (if applicable) */
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  background: white;
-  padding: 20px 30px;
-  border-radius: 10px;
-  text-align: center;
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.dots {
-  display: inline-block;
-  animation: dots 1.2s steps(4, end) infinite;
-}
-
-@keyframes dots {
-  0% {
-    content: '';
-  }
-  25% {
-    content: '.';
-  }
-  50% {
-    content: '..';
-  }
-  75% {
-    content: '...';
-  }
+  background: #0056b3;
 }
