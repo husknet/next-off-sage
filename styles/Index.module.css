@@ -1,9 +1,13 @@
+/* Login Container Styles */
 .loginContainer {
   text-align: center;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: url('/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: #333;
 }
 
 .loginBox {
@@ -42,7 +46,7 @@
   border-radius: 50%;
 }
 
-input {
+.input {
   display: block;
   width: 100%;
   padding: 10px;
@@ -52,7 +56,7 @@ input {
   font-size: 14px;
 }
 
-button {
+.button {
   width: 100%;
   padding: 10px;
   background: #007bff;
@@ -63,6 +67,6 @@ button {
   font-size: 14px;
 }
 
-button:hover {
+.button:hover {
   background: #0056b3;
 }
