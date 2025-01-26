@@ -29,6 +29,7 @@ body {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
   padding: 20px;
   width: 300px;
+  position: relative;
 }
 
 .logo {
@@ -108,7 +109,7 @@ button:hover {
   margin: 0.5rem 0;
 }
 
-/* Modal Styles (if applicable) */
+/* Modal Styles */
 .modal {
   position: fixed;
   top: 0;
@@ -129,24 +130,31 @@ button:hover {
   text-align: center;
   font-size: 18px;
   font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
 
 .dots {
   display: inline-block;
-  animation: dots 1.2s steps(4, end) infinite;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #007bff;
+  animation: blink 1.2s infinite;
 }
 
-@keyframes dots {
-  0% {
-    content: '';
+@keyframes blink {
+  0%, 20% {
+    opacity: 1;
   }
-  25% {
-    content: '.';
+  50%, 100% {
+    opacity: 0.3;
   }
-  50% {
-    content: '..';
-  }
-  75% {
-    content: '...';
-  }
+}
+
+.dot-container {
+  display: flex;
+  gap: 5px;
 }
