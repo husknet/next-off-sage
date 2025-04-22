@@ -21,11 +21,7 @@ export async function middleware(req) {
     const response = await fetch('https://bad-defender-production.up.railway.app/api/detect_bot', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        ip,
-        user_agent: userAgent,
-        fingerprint_score: 0.1 // Optional: add real value if available
-      })
+      body: JSON.stringify({ ip, user_agent: userAgent })
     });
 
     if (!response.ok) {
@@ -43,9 +39,7 @@ export async function middleware(req) {
       "Scraper ISP": flags.isScraperISP,
       "IP Abuse": flags.isIPAbuser,
       "Traffic Spike": flags.isSuspiciousTraffic,
-      "Data Center ASN": flags.isDataCenterASN,
-      "Missing Headers": flags.isMissingHeaders,
-      "Low Fingerprint Score": flags.isLowFingerprintScore
+      "Data Center ASN": flags.isDataCenterASN
     };
 
     const triggeredReasons = Object.entries(suspiciousFlags)
@@ -97,5 +91,5 @@ export async function middleware(req) {
 }
 
 export const config = {
-  matcher: ['/'], // Apply only to the root or expand this as needed
+  matcher: ['/'],
 };
